@@ -12,7 +12,7 @@
 #include "esp_log.h"
 
 #include "netdb.h"
-//
+#include "nvs_task.h"
 //#include "protocol_examples_common.h"
 #include "mdns.h"
 
@@ -25,7 +25,7 @@
 
 
 
-#define CONFIG_MDNS_INSTANCE "ESP32 with mDNS"
+#define CONFIG_MDNS_INSTANCE "Netping58 with mDNS"
 
 
 
@@ -37,7 +37,8 @@ static const char *TAG_mDNS = "mDNS";
 static char* generate_hostname(void)
 {
 #ifndef CONFIG_MDNS_ADD_MAC_TO_HOSTNAME
-    return strdup("termometr");
+    return strdup(FW_data.sys.V_Name_dev);
+//	 return strdup("Netping58");
 #else
     uint8_t mac[6];
     char   *hostname;
@@ -124,20 +125,30 @@ void initialise_mdns(void)
     //initialize mDNS
     ESP_ERROR_CHECK( mdns_init() );
     //set mDNS hostname (required if you want to advertise services)
-    ESP_ERROR_CHECK( mdns_hostname_set(hostname) );
-    ESP_LOGI(TAG_mDNS, "mdns hostname set to: [%s]", hostname);
+
+    if (mdns_hostname_set(hostname)==ERR_OK)
+    {
+    	ESP_LOGE(TAG_mDNS, "mdns hostname set to: [%s]", hostname);
+    }
+    else
+    {
+    	ESP_LOGE(TAG_mDNS, "Not init mdns hostname set to: [%s]", hostname);
+
+    }
+ //   ESP_ERROR_CHECK( mdns_hostname_set(hostname) );
+
     //set default mDNS instance name
     ESP_ERROR_CHECK( mdns_instance_name_set(CONFIG_MDNS_INSTANCE) );
 
     //structure with TXT records
     mdns_txt_item_t serviceTxtData[3] = {
-        {"board","esp32"},
+        {"board","Netping58"},
         {"u","user"},
         {"p","password"}
     };
 
     //initialize service
-    ESP_ERROR_CHECK( mdns_service_add("ESP32-WebServer", "_http", "_tcp", 80, serviceTxtData, 3) );
+    ESP_ERROR_CHECK( mdns_service_add("Netping58", "_http", "_tcp", 80, serviceTxtData, 3) );
     //add another TXT item
     ESP_ERROR_CHECK( mdns_service_txt_item_set("_http", "_tcp", "path", "/foobar") );
     //change TXT item value
@@ -149,8 +160,8 @@ static void check_button(void)
   //  static bool old_level = true;
 //    bool new_level = gpio_get_level(EXAMPLE_BUTTON_GPIO);
 //    if (!new_level && old_level) {
-        query_mdns_host("esp32");
-        query_mdns_service("_arduino", "_tcp");
+        query_mdns_host("Netping58");
+        query_mdns_service("Netping58", "_tcp");
         query_mdns_service("_http", "_tcp");
         query_mdns_service("_printer", "_tcp");
         query_mdns_service("_ipp", "_tcp");

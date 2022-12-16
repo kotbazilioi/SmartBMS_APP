@@ -1,7 +1,7 @@
 /*
  * includes_base.h
  *
- *  Created on: 18 сент. 2021 г.
+ *  Created on: 18 пїЅпїЅпїЅпїЅ. 2021 пїЅ.
  *      Author: ivanov
  */
 
@@ -17,9 +17,10 @@
 #include <nvs_flash.h>
 #include <sys/param.h>
 
-#include "esp_eth.h"
+//#include "esp_eth.h"
 #include "esp_netif.h"
-#include "nvs_flash.h"
+//#include "nvs_flash.h"
+//#include "protocol_examples_common.h"
 
 
 //////////////////////////////// LBS ////////////////////////
@@ -33,18 +34,18 @@
 //--- SMNP library (adapted)
 //#include "port/esp32/lwipopts.h"
 
-#include "lwip/apps/snmp_opts.h"
-#include "lwip/snmp.h"
-#include "lwip/apps/snmp.h"
-#include "lwip/apps/snmp_core.h"
-#include "lwip/apps/snmp_mib2.h"
-
-#include "lwip/apps/snmp_scalar.h"
+//#include "lwip/apps/snmp_opts.h"
+//#include "lwip/snmp.h"
+//#include "../components/snmp.h"
+//#include "..\components\snmp_core.h"
+//#include "../components/snmp_mib2.h"
+//
+//#include "../components/snmp_scalar.h"
 /* library for the app */
 //#include "simple_snmp_agent.h"
 /* library for static IP */
 #include "lwip/sockets.h"
-
+//#include "my_mib.h"
 
 
 //#include <esp_http_server.h>

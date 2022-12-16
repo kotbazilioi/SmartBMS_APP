@@ -1,7 +1,7 @@
 /*
  * update.c
  *
- *  Created on: 18 сент. 2021 г.
+ *  Created on: 18 пїЅпїЅпїЅпїЅ. 2021 пїЅ.
  *      Author: ivanov
  */
 
@@ -20,7 +20,7 @@
 
 
 #include "mime.h"
-#include "html_data_simple_ru.h"
+#include "..\main\html_data_simple_ru.h"
 #include "LOGS.h"
 static const char *TAG = "update_app";
 esp_app_desc_t app_desc;
@@ -39,12 +39,7 @@ esp_err_t np_http_get_handler(httpd_req_t *req)
 	return ESP_OK;
 }
 
-const httpd_uri_t np_html_uri_fwupdate_cgi = {
-	"/fwupdate.cgi",
-	HTTP_GET,
-	np_http_get_handler,
-	(void*)&_html_page_update_html
-};
+
 
 static esp_ota_handle_t otah;
 const esp_partition_t *new_part;
@@ -121,7 +116,7 @@ esp_err_t np_http_update_set(httpd_req_t *req)
      		ESP_LOGI(TAG, "Commanding reboot into %s", new_part->label);
      		httpd_resp_send(req, "", 0);
      		vTaskDelay(3 * configTICK_RATE_HZ);
-
+     		log_update_save_mess(UPD_GOOD);
      		esp_restart();
      	}
     }
@@ -140,12 +135,7 @@ err:
     return ESP_FAIL;
 }
 
-const httpd_uri_t np_html_uri_update_set = {
-	"/update_set.cgi",
-	HTTP_POST,
-	np_http_update_set,
-	0
-};
+
 
 
 esp_err_t np_http_devname_cgi(httpd_req_t *req)
@@ -186,24 +176,18 @@ esp_err_t np_http_reboot_cgi(httpd_req_t *req)
     	return ESP_FAIL;
     }
 
-	reple_to_save.type_event = RESETL;
-	reple_to_save.event_cfg.canal = 0;
-    reple_to_save.event_cfg.source=SYS;
-	reple_to_save.dicr = 1;
-
-
-	 vTaskDelay(3000 / portTICK_PERIOD_MS);
-
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
+	log_log_save_mess(LOG_RESTART);
     esp_restart();
-//    char buf[128];
-//    sprintf(buf,
-//    		"var fwver='v%.31s'\n"
-//    		"var devname='Test Netping-APP-ESP32';\n",
-//    		 app_desc.version);
-///	httpd_resp_send(req, buf, HTTPD_RESP_USE_STRLEN);
 
 	return ESP_OK;
 }
+const httpd_uri_t np_html_uri_fwupdate_cgi = {
+	"/fwupdate.cgi",
+	HTTP_GET,
+	np_http_get_handler,
+	(void*)&_html_page_update_html
+};
 
 const httpd_uri_t np_html_uri_devname_cgi = {
 	"/devname.cgi",
@@ -212,13 +196,18 @@ const httpd_uri_t np_html_uri_devname_cgi = {
 	0
 };
 
+const httpd_uri_t np_html_uri_update_set = {
+	"/update_set.cgi",
+	HTTP_POST,
+	np_http_update_set,
+	0
+};
 const httpd_uri_t np_html_uri_reboot_cgi = {
 	"/reboot.cgi",
 	HTTP_POST,
 	np_http_reboot_cgi,
 	0
 };
-
 
 const httpd_uri_t np_html_uri_update = {
 	"/update.html",
@@ -233,28 +222,6 @@ const httpd_uri_t np_html_uri_main = {
 	(void*)&_html_page_index_html
 };
 
-const httpd_uri_t np_html_uri_main_b = {
-	"/",
-	HTTP_GET,
-	np_http_get_handler,
-	(void*)&_html_page_termo_html
-};
-
-//const httpd_uri_t np_html_uri_wdog = {
-//	"/wdog.html",
-//	HTTP_GET,
-//	np_http_get_handler,
-//	(void*)&_html_page_wdog_html
-//};
-
-const httpd_uri_t np_html_uri_termo = {
-	"/termo.html",
-	HTTP_GET,
-	np_http_get_handler,
-	(void*)&_html_page_termo_html
-};
-
-
 const httpd_uri_t np_html_uri_setings = {
 	"/settings.html",
 	HTTP_GET,
@@ -262,10 +229,5 @@ const httpd_uri_t np_html_uri_setings = {
 	(void*)&_html_page_settings_html
 };
 
-const httpd_uri_t np_html_uri_sendmail = {
-	"/sendmail.html",
-	HTTP_GET,
-	np_http_get_handler,
-	(void*)&_html_page_sendmail_html
-};
+
 

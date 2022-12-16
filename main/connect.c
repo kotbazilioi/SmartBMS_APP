@@ -27,6 +27,7 @@
 #include "freertos/event_groups.h"
 #include "lwip/err.h"
 #include "lwip/sys.h"
+#include "connect.h"
 
 #ifdef CONFIG_EXAMPLE_CONNECT_IPV6
 #define MAX_IP6_ADDRS_PER_NETIF (5)
@@ -173,32 +174,32 @@ esp_err_t example_connect(void)
     }
 #endif
     start();
-    ESP_ERROR_CHECK(esp_register_shutdown_handler(&stop));
-    ESP_LOGI(TAG, "Waiting for IP(s)");
-    for (int i = 0; i < NR_OF_IP_ADDRESSES_TO_WAIT_FOR; ++i) {
-        xSemaphoreTake(s_semph_get_ip_addrs, portMAX_DELAY);
-    }
-    // iterate over active interfaces, and print out IPs of "our" netifs
-    esp_netif_t *netif = NULL;
-    esp_netif_ip_info_t ip;
-    for (int i = 0; i < esp_netif_get_nr_of_ifs(); ++i) {
-        netif = esp_netif_next(netif);
-        if (is_our_netif(TAG, netif)) {
-            ESP_LOGI(TAG, "Connected to %s", esp_netif_get_desc(netif));
-            ESP_ERROR_CHECK(esp_netif_get_ip_info(netif, &ip));
-
-            ESP_LOGI(TAG, "- IPv4 address: " IPSTR, IP2STR(&ip.ip));
-#ifdef CONFIG_EXAMPLE_CONNECT_IPV6
-            esp_ip6_addr_t ip6[MAX_IP6_ADDRS_PER_NETIF];
-            int ip6_addrs = esp_netif_get_all_ip6(netif, ip6);
-            for (int j = 0; j < ip6_addrs; ++j) {
-                esp_ip6_addr_type_t ipv6_type = esp_netif_ip6_get_addr_type(&(ip6[j]));
-                ESP_LOGI(TAG, "- IPv6 address: " IPV6STR ", type: %s", IPV62STR(ip6[j]), s_ipv6_addr_types[ipv6_type]);
-            }
-#endif
-
-        }
-    }
+//    ESP_ERROR_CHECK(esp_register_shutdown_handler(&stop));
+//    ESP_LOGI(TAG, "Waiting for IP(s)");
+//    for (int i = 0; i < NR_OF_IP_ADDRESSES_TO_WAIT_FOR; ++i) {
+//        xSemaphoreTake(s_semph_get_ip_addrs, portMAX_DELAY);
+//    }
+//    // iterate over active interfaces, and print out IPs of "our" netifs
+//    esp_netif_t *netif = NULL;
+//    esp_netif_ip_info_t ip;
+//    for (int i = 0; i < esp_netif_get_nr_of_ifs(); ++i) {
+//        netif = esp_netif_next(netif);
+//        if (is_our_netif(TAG, netif)) {
+//            ESP_LOGI(TAG, "Connected to %s", esp_netif_get_desc(netif));
+//            ESP_ERROR_CHECK(esp_netif_get_ip_info(netif, &ip));
+//
+//            ESP_LOGI(TAG, "- IPv4 address: " IPSTR, IP2STR(&ip.ip));
+//#ifdef CONFIG_EXAMPLE_CONNECT_IPV6
+//            esp_ip6_addr_t ip6[MAX_IP6_ADDRS_PER_NETIF];
+//            int ip6_addrs = esp_netif_get_all_ip6(netif, ip6);
+//            for (int j = 0; j < ip6_addrs; ++j) {
+//                esp_ip6_addr_type_t ipv6_type = esp_netif_ip6_get_addr_type(&(ip6[j]));
+//                ESP_LOGI(TAG, "- IPv6 address: " IPV6STR ", type: %s", IPV62STR(ip6[j]), s_ipv6_addr_types[ipv6_type]);
+//            }
+//#endif
+//
+//        }
+//    }
     return ESP_OK;
 }
 

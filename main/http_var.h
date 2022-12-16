@@ -1,14 +1,17 @@
 /*
  * http_var.h
  *
- *  Created on: 18 сент. 2021 г.
+ *  Created on: 18 пїЅпїЅпїЅпїЅ. 2021 пїЅ.
  *      Author: ivanov
  */
 
 #ifndef MAIN_HTML_HTTP_VAR_H_
 #define MAIN_HTML_HTTP_VAR_H_
 
-
+#include "../main/config_pj.h"
+#include "esp_http_server.h"
+#define http_ver 1
+#define http_rev 2
 
 
 typedef struct
@@ -22,6 +25,8 @@ typedef struct
 	uint8_t pulse_dur;
 }io_set_t;
 
+extern uint8_t page_sost;
+extern char buf[size_1k_buff * 1044];
 
 httpd_handle_t start_webserver(void);
 void stop_webserver(httpd_handle_t server);

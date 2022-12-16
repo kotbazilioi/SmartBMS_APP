@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/CMakeFiles/bootloader
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/CMakeFiles/bootloader.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/CMakeFiles/bootloader-complete.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-D:/ika/development/NETPING_PROJECT/110/work_project/SmartBMS_APP/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/CMakeFiles/bootloader
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/CMakeFiles/bootloader.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/CMakeFiles/bootloader-complete.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Projects/esp/workspace_bms/SmartBMS_APP_v1/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
