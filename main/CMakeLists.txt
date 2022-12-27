@@ -19,6 +19,9 @@ idf_component_register(SRCS
  "../main/termo/ds18b20.c"
   "../main/input/input.c"
    "../main/output/output.c"
+   "../main/ssd1306/ssd1306_tests.c"
+   "../main/ssd1306/ssd1306_fonts.c"
+   "../main/ssd1306/ssd1306.c"
    
                     INCLUDE_DIRS
                      ".")
